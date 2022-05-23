@@ -1,6 +1,6 @@
 # MySql InnoDB testing
 
-### Test sysvar_innodb_flush_log_at_trx_commit parameters while insert
+### Test sysvar_innodb_flush_log_at_trx_commit parameters while inserts
 
 first 10 000 records:
 
