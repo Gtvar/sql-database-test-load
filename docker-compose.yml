@@ -1,0 +1,50 @@
+version: '3.6'
+services:
+  mysql:
+    platform: linux/amd64
+    image: mysql:latest
+    restart: always
+    container_name: sql_mysql
+    env_file: configuration.env
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql:/etc/mysql/conf.d
+    ports:
+      - 3306:3306
+    networks:
+      - sql-test
+
+  percona:
+    platform: linux/amd64
+    image: percona:8
+    restart: always
+    container_name: sql_percona
+    env_file: configuration.env
+    volumes:
+      - percona_data:/var/lib/mysql
+      - ./pervona:/etc/mysql/conf.d
+    ports:
+      - 3307:3306
+    networks:
+      - sql-test
+
+  postgres:
+    image: postgres:14-alpine
+    restart: always
+    container_name: sql_postgres
+    env_file: configuration.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - '127.0.0.1:5432:5432'
+    networks:
+      - sql-test
+
+volumes:
+  mysql_data: {}
+  percona_data: {}
+  postgres_data: {}
+
+networks:
+  sql-test:
+    driver: bridge
