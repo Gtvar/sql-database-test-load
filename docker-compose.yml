@@ -22,7 +22,6 @@ services:
     env_file: configuration.env
     volumes:
       - percona_data:/var/lib/mysql
-      - ./pervona:/etc/mysql/conf.d
     ports:
       - 3307:3306
     networks:
